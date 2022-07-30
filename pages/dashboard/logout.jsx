@@ -17,7 +17,7 @@ export default () => {
 							<div className = 'text-capitalize bold letter-spacing-1 mb-2'>logout</div>
 							<p className = 'mb-4 text-muted'>All progress has been saved. No data will be lost!</p>
 						</div>
-						<div className = 'flex-h a-i-c'>
+						<div className = 'flex-h a-i-c flex-wrap'>
 							<div className = 'col-12 col-sm-auto mb-2'>
 								<input onClick = {() => cookieStore.set({
 									name: 'BRIAND',
