@@ -5,14 +5,14 @@ export const server = {
 		url: (
 			(dev)
 			? 'http://localhost:3000/'
-			: ''
+			: 'https://briand.vercel.app/'
 		)
 	},
 	backend: {
 		url: (
 			(dev)
 			? 'http://localhost:80/praise-project/'
-			: ''
+			: 'briand-project.000webhostapp.com/'
 		)
 	}
 }
