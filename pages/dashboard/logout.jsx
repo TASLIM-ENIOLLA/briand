@@ -1,4 +1,4 @@
-import Template from '../../components/dashboard/template'
+import Template from '../../components/dashboard/Template'
 import {cookieStore, cryptoGraph} from '../../functions'
 import {GlobalContext} from '../../contexts/Global'
 import {useContext} from 'react'

@@ -1,4 +1,4 @@
-import Template from '../../components/dashboard/template'
+import Template from '../../components/dashboard/Template'
 import {cryptoGraph} from '../../functions'
 
 export default () => {
