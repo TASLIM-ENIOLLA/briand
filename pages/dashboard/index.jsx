@@ -9,21 +9,21 @@ export default () => {
 	)
 }
 
-export const getServerSideProps = async (context) => {
-	const {req: {cookies}} = context
-	const briand_cookie = cookies['BRIAND'] ? cookies['BRIAND'] : undefined
+// export const getServerSideProps = async (context) => {
+// 	const {req: {cookies}} = context
+// 	const briand_cookie = cookies['BRIAND'] ? cookies['BRIAND'] : undefined
 
-	if(!briand_cookie){
-		return {
-			redirect: {
-				destination: '/'
-			}
-		}
-	}
+// 	if(!briand_cookie){
+// 		return {
+// 			redirect: {
+// 				destination: '/'
+// 			}
+// 		}
+// 	}
 	
-	return {
-		props: {
-			userData: JSON.parse(cryptoGraph.decrypt(briand_cookie))
-		}
-	}
-}
+// 	return {
+// 		props: {
+// 			userData: JSON.parse(cryptoGraph.decrypt(briand_cookie))
+// 		}
+// 	}
+// }
