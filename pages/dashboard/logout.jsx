@@ -18,7 +18,7 @@ export default () => {
 							<p className = 'mb-4 text-muted'>All progress has been saved. No data will be lost!</p>
 						</div>
 						<div className = 'flex-h a-i-c flex-wrap'>
-							<div className = 'col-12 col-sm-auto mb-4'>
+							<div className = 'col-auto mb-4'>
 								<input onClick = {() => cookieStore.set({
 									name: 'BRIAND',
 									value: undefined,
@@ -26,7 +26,7 @@ export default () => {
 									path: '/'
 								}).then(() => window.location = '/')} type = 'button' className = 'py-3 rounded-lg text-white bold shadow-sm px-5 btn-danger border text-capitalize' defaultValue = 'logout' />
 							</div>
-							<div className = 'col-12 col-sm-auto mb-4'>
+							<div className = 'col-auto mb-4'>
 								<input onClick = {() => goBack()} type = 'button' className = 'py-3 rounded-lg text-danger bold px-5 bg-clear border text-capitalize' defaultValue = 'cancel' />
 							</div>
 						</div>
