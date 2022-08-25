@@ -25,16 +25,25 @@ export const alert = (message) => {
     )
 }
 
-export const notify = ({message = '', callback, type = 'light', duration = 3000}) => {
+export const notify = ({message = '', callback, onSuccess, onError, type = 'light', duration = 3000}) => {
     const Notify = () => {
         const [doubleLine, setDoubleLine] = useState(true)
         const id = `_notify_${new Date().getTime()}`
 
         useEffect(() => {
             setTimeout(() => {
-                typeof callback === 'function' ? (
-                    callback(type)
-                ) : false
+                (typeof callback === 'function')
+                ? callback(type)
+                : false;
+
+                (typeof onSuccess === 'function' && type === 'success')
+                ? onSuccess()
+                : false;
+
+                (typeof onError === 'function' && type !== 'success')
+                ? onError()
+                : false;
+
                 ReactDOM.unmountComponentAtNode(
                     document.querySelector(`#__popup`)
                 )
@@ -42,26 +51,29 @@ export const notify = ({message = '', callback, type = 'light', duration = 3000}
         }, [])
         
         return (
-            <div id = {id} className = 'p-5 po-fixed top-0 left-0 w-100' style = {{zIndex: Z_INDEX += 10}}>
+            <div id = {id} className = 'p-5 po-fixed bottom-0 left-0 w-100' style = {{zIndex: Z_INDEX += 10}}>
                 <div className = {`animated bg-${type}-light slideInRight a-i-c px-2 rounded-1x shadow ml-auto flex-h`} style = {{maxWidth: '500px'}}>
-                    <div className = {`px-4 py-3 border-${type} h-100 border-right`}>
-                        <span className = {`bi fo-s-16 bi-${type === 'success' ? 'check-circle-fill' : type === 'danger' ? 'exclamation-triangle-fill' : 'exclamation-circle-fill'} text-${type}-dark`}></span>
+                    <div className = {`px-4 py-3 border-white h-100 border-right`}>
+                        <span className = {`bi fo-s-16 bi-${type === 'success' ? 'check-circle-fill' : type === 'danger' ? 'exclamation-triangle-fill' : 'exclamation-circle-fill'} text-white`}></span>
                     </div>
                     <div className="flex-1 py-4">
-                        <div onClick = {() => setDoubleLine(!doubleLine)} className={`${!doubleLine ? '' : 'double-line'} my-2 text-${type}-dark h-100 flex-v j-c-c px-4`}>
+                        <div onClick = {() => setDoubleLine(!doubleLine)} className={`${!doubleLine ? '' : 'double-line'} my-2 text-white h-100 fo-s-15 flex-v j-c-c px-4`}>
                             {message}
                         </div>
                     </div>
                 </div>
                 <style jsx>{`
                     .bg-danger-light{
-                        background: #f77d89;
+                        background: #ff5555;
+                    }
+                    .bg-primary-light{
+                        background: #5f55ff;
                     }
                     .text-danger-dark{
                         color: #be0f0f;
                     }
                     .bg-success-light{
-                        background: #77efa6;
+                        background: #30d569;
                     }
                     .text-success-dark{
                         color: #0fbe2b;

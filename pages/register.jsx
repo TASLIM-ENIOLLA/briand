@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import RegisterTabs from '../components/tabs/register'
 import {RegisterContext} from '../contexts/tabs/register'
 
-export default () => {
+export default ({referree_id}) => {
 	const [tabIndex, setTabIndex] = useState(0)
 	const [formData, setFormData] = useState({
 		full_name: '',
@@ -12,7 +12,10 @@ export default () => {
 		c_password: '',
 		agreement_consent: false,
 		business_category_id: '',
+		service_plan_id: '',
+		referree_id: referree_id ? referree_id : undefined
 	})
+
 	const RegisterContextValue = {
 		nextTab: () =>  tabIndex < RegisterTabs.length - 1 ? setTabIndex(tabIndex + 1) : undefined,
 		previousTab: () =>  tabIndex > 0 ? setTabIndex(tabIndex - 1) : undefined,
@@ -44,10 +47,10 @@ export default () => {
 }
 
 export const getServerSideProps = async (context) => {
-	const {req: {cookies}} = context
+	const {req: {cookies}, query: {referree_id}} = context
 	const briand_cookie = cookies['BRIAND'] ? cookies['BRIAND'] : undefined
 
-	if(briand_cookie){
+	if(!referree_id && briand_cookie){
 		return {
 			redirect: {
 				destination: '/dashboard'
@@ -56,6 +59,8 @@ export const getServerSideProps = async (context) => {
 	}
 	
 	return {
-		props: {}
+		props: {
+			referree_id: referree_id ? referree_id : null
+		}
 	}
 }

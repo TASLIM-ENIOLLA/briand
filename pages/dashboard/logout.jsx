@@ -6,7 +6,6 @@ import {useRouter} from 'next/router'
 
 export default () => {
 	const {back: goBack} = useRouter()
-	const {userData} = useContext(GlobalContext)
 
 	return (
 		<Template>

@@ -1,6 +1,15 @@
 import {useState, useRef, useEffect} from 'react'
 
-export const CheckBox = ({value = false, onChange, title}) => {
+export const Loader = () => (
+	<div>
+		<p className = 'text-capitalize text-center'>
+			<span className = 'fa bi-arrow-clockwise fa-spin fa-3x'></span>
+			<span className = 'd-block'>loading...</span>
+		</p>
+	</div>
+)
+
+export const CheckBox = ({value = false, unCheckedColorClassName, checkedColorClassName, className, onChange, title}) => {
 	const label = useRef()
 	const [checkBoxValue, setCheckBoxValue] = useState(value)
 
@@ -9,9 +18,14 @@ export const CheckBox = ({value = false, onChange, title}) => {
 	return (
 		<button className = 'bg-clear border-0' onClick = {() => label.current.click()}>
 			<label ref = {label} title = {title} className = 'user-select-0' onClick = {() => setCheckBoxValue(!checkBoxValue)}>
-				<span className = {`bi bi-record-circle${checkBoxValue ? '-fill' : ''} transit ${checkBoxValue ? 'theme-color' : 'text-muted'}`}></span>
-				<span className = 'bold ml-3 text-dark'>{title}</span>
+				<span className = {`text-shadow bi bi-check-square${checkBoxValue ? '-fill' : ''} transit ${checkBoxValue ? checkedColorClassName || 'theme-color' : unCheckedColorClassName || 'text-muted'} ${className}`}></span>
+				<span className = {`${checkBoxValue ? 'theme-color' : 'text-muted'} bold ml-3`}>{title}</span>
 			</label>
+			<style jsx>{`
+				.text-shadow{
+					text-shadow: 0px 0px 5px grey;
+				}
+			`}</style>
 		</button>
 	)
 }

@@ -1,8 +1,13 @@
-export const parseObjectToFormData = (objectFormData) => {
+export const parseObjectToFormData = (objectFormData, strict = false) => {
 	const formData = new FormData()
 
 	for(let props in objectFormData){
-		formData.append(props, objectFormData[props])
+		objectFormData[props] = (
+			(typeof objectFormData[props] === 'object')
+			? JSON.stringify(objectFormData[props])
+			: objectFormData[props]
+		)
+    	!strict || objectFormData[props] ? formData.append(props, objectFormData[props]) : undefined
 	}
 
 	return formData
@@ -60,3 +65,15 @@ export class UniqueSet{
         )
     }
 }
+
+export const fileReader = (file) => new Promise(resolved => {
+    if(file){
+        const fileReader = new FileReader()
+        fileReader.readAsDataURL(file)
+
+        fileReader.onload = () => resolved(fileReader.result)
+    }
+    else{
+        resolved('FAILED')
+    }
+})
